@@ -1,0 +1,27 @@
+ul.head-menu {
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+}
+
+ul.head-menu li {
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 5px; /* Отступ слева */
+    padding: 3px; /* Поля вокруг текста */
+}
+
+.quick-search input {
+    height: 26px;
+    width: 175px;
+    padding-left: 22px;
+}
+
+.quick-search i {
+    width: 26px;
+    /*height: 30px;*/
+    line-height: 26px;
+    text-align: center;
+    margin-right: -26px;
+    position: relative;
+    z-index: 1;
+    float: left;
+}
