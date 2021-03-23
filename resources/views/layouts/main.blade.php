@@ -23,7 +23,9 @@
                     <a class="p-2 text-dark" href="/contacts">Контакты</a>
                     <a class="p-2 text-dark" href="/about">О сайте</a>
                 </nav>
-                <input type="text" class="form-control" placeholder="Поиск по сайту">
+                <form action="{{ route('search-form') }}" method="get">
+                    <input type="text" name="search" id="search" placeholder="Поиск по сайту" class="form-control">
+                </form>
             </header>
         </div>
         <!--main part-->
