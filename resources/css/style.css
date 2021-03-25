@@ -25,3 +25,36 @@ ul.head-menu li {
     z-index: 1;
     float: left;
 }
+
+h1 > a, h2 > a, h3 > a,
+h1 > a:hover, h2 > a:hover, h3 > a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+small > a,
+small > a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+img { max-width: 100%; }
+
+div.scrollup {
+    position: relative; /* фиксированная позиция */
+    color: #fff; /* цвет текста */
+    background-color: #286090; /* цвет заднего фона */
+    /*right: 10px; !* расстояние от правого края *!*/
+    bottom: 10px; /* расстояние от нижнего края */
+    padding: 4px 10px; /* отступы до содержимого блока */
+    font-size: 20px; /* размер шрифта (иконки) */
+    border-radius: 4px; /* скругление краев */
+    cursor: pointer; /* форма курсора */
+    display: none; /* не отображать элемент */
+    text-align: center; /*выравнивание содержимого элемента по центру */
+}
+
+div.scrollup:hover {
+    background-color: #000; /* цвет заднего фона при наведении */
+}
+
