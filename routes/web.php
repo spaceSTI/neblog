@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -30,12 +31,10 @@ Route::get('/about', function () {
     return view('about');
 });
 
-
 Route::get('/search', [SearchController::class, 'search'])->name('search-form');
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
