@@ -16,7 +16,7 @@ class ArticleService
         $article->title = $request->title;
         $article->brief = $request->brief;
         $article->article = $request->article;
-        $article->status = 'stubbed';  //  TODO нормальнай
+        $article->status = $request->status;
         $article->save();
     }
 }

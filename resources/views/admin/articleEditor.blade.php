@@ -40,7 +40,12 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <button class="btn btn-primary" type="submit">Button</button>
+                    <select name="status">
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                        <option value="intermediate">Intermediate</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit">Отправить</button>
                 </form>
             </div>
         </div>

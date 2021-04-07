@@ -15,11 +15,11 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('title',255)->nullable(false);
-            $table->text('brief')->nullable(false);
+            $table->string('title',255);
+            $table->text('brief');
             $table->text('article')->nullable(true);
-            $table->string('status',255)->nullable(false);
-            $table->dateTime('created_at')->nullable(false);
+            $table->string('status',255);
+            $table->dateTime('created_at');
             $table->index(['status','created_at']);
         });
     }
