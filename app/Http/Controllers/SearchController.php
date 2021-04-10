@@ -7,12 +7,12 @@ use Illuminate\Http\RedirectResponse;
 
 class SearchController extends Controller
 {
-    public function search(SearchRequest $request): RedirectResponse
+    public function search(SearchRequest $request)
     {
         if ($request->isInvalid()) {
             return back();
         }
-
-        dd($validated = $request->validated());
+        return view('search');
+        //dd($validated = $request->validated());
     }
 }

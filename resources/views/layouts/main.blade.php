@@ -16,7 +16,7 @@
     @include('flashMessage')
     <!--Header-->
         <div class="row">
-            <header class="col-lg-12 d-flex flex-column flex-md-row align-items-center pr-1 pl-1 p-3 px-md-4 bg-info border-bottom shadow-sm">
+            <header class="col-lg-12 d-flex flex-column flex-md-row align-items-center pr-1 pl-1 p-3 px-md-4 border-bottom shadow-sm">
                 <p class="d-none d-sm-none d-md-block col-4 h3 my-0 me-md-auto fw-normal">Neblog</p>
                 <nav class="d-none d-sm-none d-md-block col-md-4  col-6 my-2 my-md-0 me-md-3">
                     <a class="p-2 text-dark" href="/">Блог</a>
@@ -51,13 +51,13 @@
         </div>
         <!--main part-->
         <div class="m-2 p-0 row">
-            <div class="col-md-8 bg-warning">
+            <div class="col-md-8">
                 @yield('content')
             </div>
-            <div class="col-md-4 d-none d-sm-none d-md-block bg-info">
+            <div class="col-md-4 d-none d-sm-none d-md-block">
                 News Feed block
                 <div class="row">
-                    <div class="col bg-warning">
+                    <div class="col">
                         <h3>Облако тегов</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             In vitae eros nec erat mattis bibendum.

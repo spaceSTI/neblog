@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Article;
 use App\Rules\InputStringSize;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * @property-read string $title
@@ -33,7 +35,7 @@ class AddArticleRequest extends FormRequest
         return [
             'title' => ['required', new InputStringSize(255)],
             'brief' => 'required',
-            //'status' => ['required', new InputStringSize(255)],
+            'status' => ['required', Rule::in(Article::STATUSES)],
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\MainController;
 use App\Http\Requests\AddArticleRequest;
 use App\Services\ArticleService;
 
@@ -17,14 +16,22 @@ class ArticleController extends AdminController
         $this->service = $service;
     }
 
-    public function showArticleForm()
+    public function showForm()
     {
         return view('/admin/articleEditor');
     }
 
-    public function storeArticle(AddArticleRequest $request)
+    public function add(AddArticleRequest $request)
     {
         $this->service->storeArticle($request);
-        return redirect()->action([MainController::class, 'index']);
+        return redirect('/');
+    }
+
+    public function view(int $id)
+    {
+
+        //dd($model->created_at->format('d/m/Y')); exit; //DBG
+
+        return view('/publication', ['article' => $this->service->getArticle($id)]);
     }
 }
