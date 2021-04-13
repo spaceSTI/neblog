@@ -6,8 +6,11 @@ namespace App\Services;
 
 use App\Http\Requests\AddArticleRequest;
 use App\Models\Article;
+use App\Presentations\ArticlePresentation;
 use App\Presentations\ArticleTransformer;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 
 class ArticleService
@@ -22,17 +25,29 @@ class ArticleService
         $article->save();
     }
 
-    public function getArticle(int $id): Article
+    public function getArticle(int $id): ArticlePresentation
     {
-        return Article::findOrFail($id);
+        return ArticleTransformer::buildForItem(Article::findOrFail($id));
     }
 
-    public function getArticles(): array
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function getArticles(): LengthAwarePaginator
     {
+        //инициализация ДТО, как пустого массива
         $dtos = [];
-        foreach (Article::all() as $article) {
+        //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансф.
+        $paginator = Article::paginate(1);
+        foreach ($paginator as $article) {
             $dtos[] = ArticleTransformer::buildForList($article);
         }
-        return $dtos;
+
+        return new LengthAwarePaginator(
+            $dtos, $paginator->total(),
+            $paginator->perPage(),
+            $paginator->currentPage(),
+            $paginator->getOptions()
+        );
     }
 }

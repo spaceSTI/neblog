@@ -1,8 +1,14 @@
+<?php
+/**
+ * @var ArticlePresentation[] $articles
+ */
+use App\Presentations\ArticlePresentation;
+?>
 @extends('layouts.main')
 @section('content')
     @foreach($articles as $dto)
         <div class="my-2">
-            <h3><a href="{{  $dto->itemUrl }}">{{ $dto->title }}</a></h3>
+            <h3><a href="{{ $dto->itemUrl }}">{{ $dto->title }}</a></h3>
             <p>
                 <small>{{ $dto->createdAt }}</small>
             </p>
@@ -17,4 +23,6 @@
             </div>
         </div>
     @endforeach
+
+    {{ $articles->links() }}
 @endsection
