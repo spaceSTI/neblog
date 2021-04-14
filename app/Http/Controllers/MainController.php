@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ArticleService;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
