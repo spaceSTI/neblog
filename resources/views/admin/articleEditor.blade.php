@@ -10,6 +10,7 @@
                         name="title"
                         type="text"
                         placeholder="Заголовок"
+                        value="{{ old('title') }}"
                     >
                     @error('title')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -22,7 +23,7 @@
                             name="brief"
                             rows="1"
                             placeholder="Превью"
-                        ></textarea>
+                        >{{ old('brief') }}</textarea>
                     @error('brief')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -34,7 +35,8 @@
                             name="article"
                             rows="5"
                             placeholder="Текст статьи"
-                        ></textarea>
+                        >{{ old('article') }}</textarea>
+
                     @error('article')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
