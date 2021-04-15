@@ -23,8 +23,13 @@ class ArticleController extends AdminController
 
     public function add(AddArticleRequest $request)
     {
-        $this->service->storeArticle($request);
-        return redirect('/');
+        $id = $this->service->storeArticle($request);
+        return redirect(
+            route(
+                'admin/view-article',
+                ['id' => $id]
+            )
+        );
     }
 
     public function view(int $id)
@@ -32,6 +37,6 @@ class ArticleController extends AdminController
 
         //dd($model->created_at->format('d/m/Y')); exit; //DBG
 
-        return view('/publication', ['article' => $this->service->getArticle($id)]);
+        return view('/item', ['article' => $this->service->getArticle($id)]);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,10 @@ Route::get('/about', function () {
 
 Route::get('search', [SearchController::class, 'search'])->name('search-form');
 
+Route::get('{id}', [UserArticleController::class, 'view'])
+    ->where('id', '\d+')
+    ->name('view-article');
+
 
 /**
  * Admin zone
@@ -44,7 +49,7 @@ Route::get('admin', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('admin/add-article', [ArticleController::class, 'showForm'])->name('article-form');
 Route::post('admin/add-article', [ArticleController::class, 'add']);
 
-Route::get('{id}', [ArticleController::class, 'view'])
+Route::get('admin/{id}', [ArticleController::class, 'view'])
     ->where('id', '\d+')
-    ->name('view-article');
+    ->name('admin-view-article');
 

@@ -3,9 +3,16 @@
  * @var ArticlePresentation[] $articles
  */
 use App\Presentations\ArticlePresentation;
+use App\Helpers;
 ?>
+
 @extends('layouts.main')
 @section('content')
+
+    @if(Helpers::isAdmin())
+        <div class="row">Test odmen</div>
+    @endif
+
     @foreach($articles as $dto)
         <div class="my-2">
             <h3><a href="{{ $dto->itemUrl }}">{{ $dto->title }}</a></h3>
@@ -25,4 +32,4 @@ use App\Presentations\ArticlePresentation;
     @endforeach
 
     {{ $articles->links() }}
-@endsection
+@endsection                                                     1
