@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -15,6 +15,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
 
+        /** @var User $user */
         $user = Auth::user();
         if (!$user || config('auth.admin_user') !== $user->name) {
             return;

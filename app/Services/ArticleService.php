@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class ArticleService
 {
-    public function storeArticle(AddArticleRequest $request): void
+    public function storeArticle(AddArticleRequest $request): int
     {
         $article = new Article();
         $article->title = $request->title;
@@ -23,6 +23,7 @@ class ArticleService
         $article->article = $request->article;
         $article->status = $request->status;
         $article->save();
+        return $article->id;
     }
 
     public function getArticle(int $id): ArticlePresentation
@@ -38,7 +39,7 @@ class ArticleService
         //инициализация ДТО, как пустого массива
         $dtos = [];
         //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансф.
-        $paginator = Article::paginate(1);
+        $paginator = Article::paginate(15);
         foreach ($paginator as $article) {
             $dtos[] = ArticleTransformer::buildForList($article);
         }
