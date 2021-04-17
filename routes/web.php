@@ -41,15 +41,24 @@ Route::get('{id}', [UserArticleController::class, 'view'])
 /**
  * Admin zone
  */
+
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('admin', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('admin/add-article', [ArticleController::class, 'showForm'])->name('article-form');
-Route::post('admin/add-article', [ArticleController::class, 'add']);
+Route::get('admin', [DashboardController::class, 'index'])->name('admin-dashboard');
 
-Route::get('admin/{id}', [ArticleController::class, 'view'])
+Route::get('/admin/articles', [ArticleController::class, 'index'])->name('admin-article-list');
+Route::get('admin/add-article', [ArticleController::class, 'addNew'])->name('admin-article-form');
+Route::post('admin/add-article', [ArticleController::class, 'create']);
+
+Route::get('admin/edit-article/{id}', [ArticleController::class, 'edit'])
+    ->where('id', '\d+')
+    ->name('admin-edit-article');
+
+Route::post('admin/edit-article/{id}', [ArticleController::class, 'update'])->where('id', '\d+');
+
+Route::get('admin/{id}', [ArticleController::class, 'item'])
     ->where('id', '\d+')
     ->name('admin-view-article');
 

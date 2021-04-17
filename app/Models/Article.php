@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property ?string $article
  * @property string $status
  * @property Carbon $created_at
+ *
+ * @method static findOrFail(int $id): Article
+ * @method static paginate(int $pageSize): LengthAwarePaginator
  */
 class Article extends Model
 {

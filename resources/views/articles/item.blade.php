@@ -13,7 +13,7 @@ use App\Presentations\ArticlePresentation;
         </p>
         <div class="row">
             <div class="ml-0,5 p-2 col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-                <a href="/"><img class="barker" src="images/123.png" alt="image"></a>
+               <img class="barker" src="/images/123.png" alt="image">
             </div>
             <div class="col-md" name="brief">
                 {!! $article->brief !!}

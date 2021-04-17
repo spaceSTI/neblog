@@ -12,18 +12,29 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
-
 class ArticleService
 {
-    public function storeArticle(AddArticleRequest $request): int
+    public function create(AddArticleRequest $request): int
     {
         $article = new Article();
+        $this->fill($article, $request);
+        $article->save();
+        return $article->id;
+    }
+
+    public function update(int $id, AddArticleRequest $request): void
+    {
+        $article = Article::findOrFail($id);
+        $this->fill($article, $request);
+        $article->save();
+    }
+
+    private function fill(Article $article, AddArticleRequest $request): void
+    {
         $article->title = $request->title;
         $article->brief = $request->brief;
         $article->article = $request->article;
         $article->status = $request->status;
-        $article->save();
-        return $article->id;
     }
 
     public function getArticle(int $id): ArticlePresentation
@@ -43,9 +54,9 @@ class ArticleService
         foreach ($paginator as $article) {
             $dtos[] = ArticleTransformer::buildForList($article);
         }
-
         return new LengthAwarePaginator(
-            $dtos, $paginator->total(),
+            $dtos,
+            $paginator->total(),
             $paginator->perPage(),
             $paginator->currentPage(),
             $paginator->getOptions()

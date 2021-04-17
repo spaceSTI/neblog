@@ -11,29 +11,31 @@ use App\Models\Article;
  */
 class ArticleTransformer
 {
-    //Трансформер заполняет только необходимые для  конкретного вызова свойства. ??Завести переменную??
+    //Трансформер заполняет только необходимые для  конкретного вызова свойства.
 
     public static function buildForList(Article $article): ArticlePresentation
     {
-        $dto = new ArticlePresentation();
-        $dto->title = $article->title;
-        $dto->brief = $article->brief;
-        $dto->status = $article->status;
+        $dto = self::buildCommonPart($article);
         $dto->itemUrl = route('view-article', ['id' => $article->id]);
-        $dto->createdAt = $article->created_at->format('d/m/Y');
         return $dto;
     }
 
     public static function buildForItem(Article $article): ArticlePresentation
     {
-        $dto = new ArticlePresentation();
-        $dto->title = $article->title;
-        $dto->brief = $article->brief;
+        $dto = self::buildCommonPart($article);
         $dto->article = $article->article;
-        $dto->status = $article->status;
-        $dto->itemUrl = route('view-article', ['id' => $article->id]);
         $dto->createdAt = $article->created_at->format('d/m/Y');
         return $dto;
     }
 
+    private static function buildCommonPart(Article $article): ArticlePresentation
+    {
+        $dto = new ArticlePresentation();
+        $dto->id = $article->id;
+        $dto->title = $article->title;
+        $dto->brief = $article->brief;
+        $dto->status = $article->status;
+        $dto->createdAt = $article->created_at->format('d/m/Y');
+        return $dto;
+    }
 }

@@ -15,6 +15,6 @@ class MainController extends Controller
 
     public function index()
     {
-        return view('mainPage', ['articles' => $this->service->getArticles()]);
+        return view('articles/list', ['articles' => $this->service->getArticles()]);
     }
 }

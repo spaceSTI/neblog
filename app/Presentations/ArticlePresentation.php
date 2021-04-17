@@ -6,6 +6,7 @@ namespace App\Presentations;
 
 class ArticlePresentation
 {
+    public int $id;
     public string $title;
     public string $brief;
     public ?string $article;

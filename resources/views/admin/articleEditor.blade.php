@@ -1,3 +1,12 @@
+<?php
+/**
+ * @var Article|null $article
+ */
+
+use App\Models\Article;
+
+?>
+
 @extends('layouts.admin')
 @section('content')
     <div class="row">
@@ -10,7 +19,7 @@
                         name="title"
                         type="text"
                         placeholder="Заголовок"
-                        value="{{ old('title') }}"
+                        value="{{ old('title') ?? $article->title ?? ''}}"
                     >
                     @error('title')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -23,7 +32,7 @@
                             name="brief"
                             rows="1"
                             placeholder="Превью"
-                        >{{ old('brief') }}</textarea>
+                        >{{ old('brief') ?? $article->brief ?? '' }}</textarea>
                     @error('brief')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -35,7 +44,7 @@
                             name="article"
                             rows="5"
                             placeholder="Текст статьи"
-                        >{{ old('article') }}</textarea>
+                        >{{ old('article') ?? $article->article ?? '' }}</textarea>
 
                     @error('article')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -43,8 +52,14 @@
                 </div>
 
                 <select name="status" class="custom-select col-1">
-                    @foreach(App\Models\Article::STATUSES as $status)
-                        <option value="{{ $status }}">{{ ucfirst($status) }}</option>
+                    <?php $currentStatus = old('status') ?? $article->status ?? ''; ?>
+                    @foreach(Article::STATUSES as $status)
+                        <option
+                            value="{{ $status }}"
+                            {{ $status === $currentStatus ? 'selected' : '' }}
+                        >
+                            {{ ucfirst($status) }}
+                        </option>
                     @endforeach
                 </select>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\AddArticleRequest;
+use App\Models\Article;
 use App\Services\ArticleService;
 
 class ArticleController extends AdminController
@@ -16,27 +17,45 @@ class ArticleController extends AdminController
         $this->service = $service;
     }
 
-    public function showForm()
+    public function index()
+    {
+        return view('/articles/list', ['articles' => $this->service->getArticles()]);
+    }
+
+    public function item(int $id)
+    {
+        return view('/articles/item', ['article' => $this->service->getArticle($id)]);
+    }
+
+    public function addNew()
     {
         return view('/admin/articleEditor');
     }
 
-    public function add(AddArticleRequest $request)
+    public function create(AddArticleRequest $request)
     {
-        $id = $this->service->storeArticle($request);
+        $id = $this->service->create($request);
         return redirect(
             route(
-                'admin/view-article',
+                'admin-view-article',
                 ['id' => $id]
             )
         );
     }
 
-    public function view(int $id)
+    public function edit(int $id)
     {
+        return view('/admin/articleEditor', ['article' => $this->service->getArticle($id)]);
+    }
 
-        //dd($model->created_at->format('d/m/Y')); exit; //DBG
-
-        return view('/item', ['article' => $this->service->getArticle($id)]);
+    public function update(int $id, AddArticleRequest $request)
+    {
+        $this->service->update($id, $request);
+        return redirect(
+            route(
+                'admin-view-article',
+                ['id' => $id]
+            )
+        );
     }
 }
