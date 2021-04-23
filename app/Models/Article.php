@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Article extends Model
 {
+    use HasFactory;
+
     public const
         STATUS_PUBLIC = 'public',
         STATUS_PRIVATE = 'private',
@@ -33,15 +36,6 @@ class Article extends Model
     protected $table = 'articles';
 
     public $timestamps = false;
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->created_at = $model->freshTimestamp();
-        });
-    }
 
     public function getCreatedAtAttribute(string $value): Carbon
     {

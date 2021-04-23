@@ -8,6 +8,7 @@ use App\Http\Requests\AddArticleRequest;
 use App\Models\Article;
 use App\Presentations\ArticlePresentation;
 use App\Presentations\ArticleTransformer;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,7 @@ class ArticleService
     {
         $article = new Article();
         $this->fill($article, $request);
+        $article->created_at = Carbon::now();
         $article->save();
         return $article->id;
     }
@@ -51,7 +53,7 @@ class ArticleService
         //инициализация ДТО, как пустого массива
         $dtos = [];
         //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансформер.
-        $paginator = Article::paginate(15);
+        $paginator = Article::where('status', 'public')->orderby('created_at', 'desc')->paginate(5);
         foreach ($paginator as $article) {
             $dtos[] = ArticleTransformer::buildForList($article);
         }
