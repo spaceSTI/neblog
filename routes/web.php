@@ -48,6 +48,9 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('admin', [DashboardController::class, 'index'])->name('admin-dashboard');
 
+Route::get('admin/title-list', [ArticleController::class, 'titleList'])->name('admin-title-list');
+
+
 Route::get('/admin/articles', [ArticleController::class, 'index'])->name('admin-article-list');
 Route::get('admin/add-article', [ArticleController::class, 'addNew'])->name('admin-article-form');
 Route::post('admin/add-article', [ArticleController::class, 'create']);

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $brief
  * @property ?string $article
  * @property string $status
+ * @property string $keywords
  * @property Carbon $created_at
  *
  * @method static findOrFail(int $id): Article

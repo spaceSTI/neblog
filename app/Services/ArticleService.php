@@ -35,6 +35,7 @@ class ArticleService
         $article->brief = $request->brief;
         $article->article = $request->article;
         $article->status = $request->status;
+        $article->keywords = $request->keywords;
     }
 
     public function getArticle(int $id): ArticlePresentation
@@ -49,11 +50,28 @@ class ArticleService
     {
         //инициализация ДТО, как пустого массива
         $dtos = [];
-        //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансф.
+        //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансформер.
         $paginator = Article::paginate(15);
         foreach ($paginator as $article) {
             $dtos[] = ArticleTransformer::buildForList($article);
         }
+        return $this->rebuildPaginator($dtos, $paginator);
+    }
+
+    public function getTitleList(): LengthAwarePaginator
+    {
+        //инициализация ДТО, как пустого массива
+        $dtos = [];
+        //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансформер.
+        $paginator = Article::select(['id', 'title'])->paginate(50);
+        foreach ($paginator as $article) {
+            $dtos[] = ArticleTransformer::buildForTitleList($article);
+        }
+        return $this->rebuildPaginator($dtos, $paginator);
+    }
+
+    private function rebuildPaginator(array $dtos, LengthAwarePaginator $paginator): LengthAwarePaginator
+    {
         return new LengthAwarePaginator(
             $dtos,
             $paginator->total(),

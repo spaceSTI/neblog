@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
  * @property-read string $brief
  * @property-read ?string $article
  * @property-read string $status
+ * @property-read string $keywords
  */
 class AddArticleRequest extends FormRequest
 {
@@ -35,6 +36,7 @@ class AddArticleRequest extends FormRequest
         return [
             'title' => ['required', new InputStringSize(255)],
             'brief' => 'required',
+            'keywords' => 'required',
             'status' => ['required', Rule::in(Article::STATUSES)],
         ];
     }

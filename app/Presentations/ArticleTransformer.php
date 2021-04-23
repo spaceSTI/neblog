@@ -20,11 +20,21 @@ class ArticleTransformer
         return $dto;
     }
 
+    public static function buildForTitleList(Article $article): ArticlePresentation
+    {
+        $dto = new ArticlePresentation();
+        $dto->id = $article->id;
+        $dto->title = $article->title;
+        $dto->itemUrl = route('view-article', ['id' => $article->id]);
+        return $dto;
+    }
+
     public static function buildForItem(Article $article): ArticlePresentation
     {
         $dto = self::buildCommonPart($article);
+        $dto->keywords = $article->keywords;
+        $dto->description = strip_tags($article->brief);
         $dto->article = $article->article;
-        $dto->createdAt = $article->created_at->format('d/m/Y');
         return $dto;
     }
 

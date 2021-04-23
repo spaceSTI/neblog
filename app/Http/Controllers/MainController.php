@@ -17,4 +17,9 @@ class MainController extends Controller
     {
         return view('articles/list', ['articles' => $this->service->getArticles()]);
     }
+
+    public function item(int $id)
+    {
+        return view('/articles/item', ['article' => $this->service->getArticle($id)]);
+    }
 }

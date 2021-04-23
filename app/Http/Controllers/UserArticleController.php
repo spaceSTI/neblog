@@ -16,6 +16,6 @@ class UserArticleController extends Controller
 
     public function view(int $id)
     {
-        return view('/item', ['article' => $this->service->getArticle($id)]);
+        return view('/articles/item', ['article' => $this->service->getArticle($id)]);
     }
 }

@@ -50,7 +50,18 @@ use App\Models\Article;
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
+                <div class="form-group">
+                    <input
+                        class="form-control"
+                        name="keywords"
+                        type="text"
+                        placeholder="Ключевые слова"
+                        value="{{ old('keywords') ?? $article->keywords ?? ''}}"
+                    >
+                    @error('keywords')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
                 <select name="status" class="custom-select col-1">
                     <?php $currentStatus = old('status') ?? $article->status ?? ''; ?>
                     @foreach(Article::STATUSES as $status)

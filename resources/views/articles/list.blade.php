@@ -6,7 +6,12 @@ use App\Presentations\ArticlePresentation;
 use App\Helpers;
 
 ?>
-@extends('layouts.main')
+@extends(Helpers::isAdmin()  ?  'layouts.admin' : 'layouts.main'  )
+
+@section('crawlerMeta')
+    <meta name="ROBOTS" content="noindex, follow">
+@endsection
+
 @section('content')
     @foreach($articles as $dto)
         @if(Helpers::isAdmin())
@@ -30,6 +35,5 @@ use App\Helpers;
             </div>
         </div>
     @endforeach
-
     {{ $articles->links() }}
 @endsection
