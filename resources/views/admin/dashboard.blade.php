@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-<h2>Dashboard</h2>
-
     <ul>
         <li><a href="{{ route('admin-article-form') }}">Add article</a></li>
     </ul>
