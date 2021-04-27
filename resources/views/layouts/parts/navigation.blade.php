@@ -1,7 +1,7 @@
 <div class="row">
     <header class="col-lg-12 d-flex flex-column flex-md-row align-items-center pr-1 pl-1 p-3 px-md-4 border-bottom shadow-sm">
         <div class="d-none d-sm-none d-md-block col-4 h3 my-0 me-md-auto fw-normal">
-            <img class="logo" src="/images/logo.png" alt="image">
+            <a href="/"><img class="logo" src="/images/logo.png" alt="image"></a>
         </div>
         <nav class="d-none d-sm-none d-md-block col-md-4  col-6 my-2 my-md-0 me-md-3">
             <a class="p-2 text-dark" href="/">Блог</a>
@@ -10,7 +10,7 @@
         </nav>
         {{----}}
         <form class="d-none d-sm-none d-md-block mb-1 mt-1 col-sm-12 col-md-4 col-lg-4 col-xl-4" action="{{ route('search-form') }}" method="get">
-            <input type="text" name="search" id="search" placeholder="Поиск по сайту" class="form-control">
+            <input type="text" name="search" placeholder="Поиск по сайту" class="form-control">
         </form>
 
         {{--Navigation panel for mobile ver--}}
@@ -19,7 +19,7 @@
                 <img class="logo" src="/images/mobile_logo.png" alt="image">
             </div>
             <form class="col-8  d-md-none d-lg-none d-xl-none col-xs-8 mb-1 mt-1 pr-1 pl-1" action="{{ route('search-form') }}" method="get">
-                <input type="text" name="search" id="search" placeholder="Че ищем?" class="form-control">
+                <input type="text" name="search" placeholder="Че ищем?" class="form-control">
             </form>
             <div class="btn-group dropleft col-2 d-md-none d-lg-none d-xl-none">
                 <!-- Кнопка -->
