@@ -1,2 +1,23 @@
 User-agent: *
-Disallow:
+
+Disallow: /admin/
+
+Disallow: /search
+Disallow: /*/print
+Disallow: /*/pdf
+
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+
+User-Agent: Yandex
+
+Disallow: /admin/
+
+Disallow: /search
+Disallow: /*/print
+Disallow: /*/pdf
+
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
