@@ -62,7 +62,7 @@ use App\Models\Article;
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <select name="status" class="custom-select col-1">
+                <select name="status" class="custom-select col-2">
                     <?php $currentStatus = old('status') ?? $article->status ?? ''; ?>
                     @foreach(Article::STATUSES as $status)
                         <option

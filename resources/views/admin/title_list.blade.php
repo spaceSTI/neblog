@@ -20,7 +20,7 @@ use App\Presentations\ArticlePresentation;
 </head>
 <body>
     <div class="container">
-    @include('flashMessage')
+    @include('layouts/parts/flash_message')
     <!--Header-->
         <div class="row">
             <header class="col-lg-12 d-flex flex-column flex-md-row align-items-center pr-1 pl-1 p-3 px-md-4 border-bottom shadow-sm">
