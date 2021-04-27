@@ -1,10 +1,23 @@
+<?php
+use App\Helpers;
+
+?>
+
 <div class="row">
     <header class="col-lg-12 d-flex flex-column flex-md-row align-items-center pr-1 pl-1 p-3 px-md-4 border-bottom shadow-sm">
         <div class="d-none d-sm-none d-md-block col-4 h3 my-0 me-md-auto fw-normal">
-            <a href="/"><img class="logo" src="/images/logo.png" alt="image"></a>
+            @if(Helpers::isAdmin())
+                <a href="/admin/articles"><img class="logo" src="/images/logo.png" alt="image"></a>
+            @else <a href="/"><img class="logo" src="/images/logo.png" alt="image"></a>
+
+            @endif
+
         </div>
         <nav class="d-none d-sm-none d-md-block col-md-4  col-6 my-2 my-md-0 me-md-3">
-            <a class="p-2 text-dark" href="/">Блог</a>
+            @if(Helpers::isAdmin())
+             <a class="p-2 text-dark" href="/admin/articles">Блог</a>
+              @else<a class="p-2 text-dark" href="/">Блог</a>
+            @endif
             <a class="p-2 text-dark" href="/contacts">Контакты</a>
             <a class="p-2 text-dark" href="/about">О сайте</a>
         </nav>
