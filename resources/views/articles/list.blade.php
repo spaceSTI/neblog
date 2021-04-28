@@ -29,7 +29,7 @@ use App\Helpers;
                     <img class="barker" src="/images/pug.jpg" alt="image">
                 </div>
                 <div class="col-md">
-                    {!! $dto->brief !!}
+                    <p class="brief"> {!! $dto->brief !!} </p>
                     <small><a href="{{  $dto->itemUrl }}">Показать полностью</a></small>
                 </div>
             </div>

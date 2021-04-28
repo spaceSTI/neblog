@@ -26,12 +26,12 @@ use App\Helpers;
                 <img class="barker" src="/images/123.png" alt="image">
             </div>
             <div class="col-md" name="brief">
-                {!! $article->brief !!}
+                <p class="brief"> {!! $article->brief !!} </p>
             </div>
         </div>
         <div class="row" name="article">
             <div class="col">
-                {!! $article->article !!}
+                <p class="article"> {!! $article->article !!} </p>
             </div>
         </div>
     </div>
