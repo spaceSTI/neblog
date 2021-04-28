@@ -12,6 +12,8 @@ Disallow: /images/
 
 User-Agent: Yandex
 
+Clean-param: utm_source&utm_medium&utm_term&utm_content&utm_campaign&_openstat&_from&from
+
 Disallow: /admin/
 
 Disallow: /search
