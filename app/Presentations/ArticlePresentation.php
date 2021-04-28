@@ -13,7 +13,13 @@ class ArticlePresentation
     public string $status = 'if you are reading this-the value is not written to the database';
     public string $itemUrl = 'if you are reading this-the value is not written to the database';
     public string $createdAt = 'if you are reading this-the value is not written to the database';
+
     //meta data
     public string $keywords = 'if you are reading this-the value is not written to the database';
     public string $description = 'if you are reading this-the value is not written to the database';
+
+    /**
+     * @var TagPresentation[]
+     */
+    public array $tags = [];
 }

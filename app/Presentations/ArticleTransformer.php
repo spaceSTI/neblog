@@ -41,6 +41,12 @@ class ArticleTransformer
     private static function buildCommonPart(Article $article): ArticlePresentation
     {
         $dto = new ArticlePresentation();
+        foreach ($article->tags as $tag) {
+            $tagDto = new TagPresentation();
+            $tagDto->id = $tag->id;
+            $tagDto->tag = $tag->tag;
+            $dto->tags[] = $tagDto;
+        }
         $dto->id = $article->id;
         $dto->title = $article->title;
         $dto->brief = $article->brief;

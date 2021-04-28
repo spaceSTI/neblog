@@ -34,5 +34,15 @@ use App\Helpers;
                 <p class="article"> {!! $article->article !!} </p>
             </div>
         </div>
+        <div class="row" name="tag">
+            <div class="col">
+
+                @foreach( $article->tags as $tag)
+                    <a href="/"><span class="badge badge-secondary"> {!! $tag->tag !!} </span></a>
+                @endforeach
+
+            </div>
+        </div>
     </div>
 @endsection
+

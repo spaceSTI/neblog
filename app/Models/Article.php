@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -14,6 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property string $keywords
  * @property Carbon $created_at
+ *
+ * Relations:
+ *
+ * @property-read Tag[] $tags
  *
  * @method static findOrFail(int $id): Article
  * @method static paginate(int $pageSize): LengthAwarePaginator
@@ -40,5 +45,10 @@ class Article extends Model
     public function getCreatedAtAttribute(string $value): Carbon
     {
         return new Carbon($value);
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }
