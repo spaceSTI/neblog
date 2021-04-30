@@ -19,10 +19,10 @@ class TagFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'tag' => $this->faker->word,
+            'tag' => $this->faker->words(rand(1, 2), true),
         ];
     }
 }
