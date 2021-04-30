@@ -9,9 +9,7 @@ use App\Models\Article;
 use App\Presentations\ArticlePresentation;
 use App\Presentations\ArticleTransformer;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
 
 class ArticleService
 {

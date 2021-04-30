@@ -33,6 +33,15 @@ use App\Helpers;
                     <small><a href="{{  $dto->itemUrl }}">Показать полностью</a></small>
                 </div>
             </div>
+            <div class="row" name="tag">
+                <div class="col">
+
+                    @foreach( $dto->tags as $tag)
+                        <a href="{{ $tag->filterUrl }}"><span class="badge badge-secondary"> {!! $tag->tag !!} </span></a>
+                    @endforeach
+
+                </div>
+            </div>
         </div>
     @endforeach
     {{ $articles->links() }}

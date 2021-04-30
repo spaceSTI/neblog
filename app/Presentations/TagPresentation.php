@@ -5,7 +5,7 @@ namespace App\Presentations;
 
 class TagPresentation
 {
-    public int $id;
-
-    public string $tag;
+    public int $id = 0;
+    public string $filterUrl = 'not initialized';
+    public string $tag = 'not initialized';
 }
