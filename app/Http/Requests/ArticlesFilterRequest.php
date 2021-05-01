@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Session;
 
 /**
- * @property-read ?string $tag
+ * @property ?string $tag
+ * @property ?string $status
  */
 class ArticlesFilterRequest extends FormRequest
 {
@@ -24,10 +27,25 @@ class ArticlesFilterRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'tag' => ['integer'],
+            'tag' => ['nullable', 'string', 'max:50'],
         ];
+    }
+
+    //вывод ошибок в flash message
+    protected function failedValidation(Validator $validator): void
+    {
+        $errorStr = implode(' ', $validator->errors()->messages()['tag']);
+        Session::flash('info', $errorStr);
+    }
+
+    public function isInvalid(): bool
+    {
+        // Laravel doesn't auto validate GET query string. So, here makes explicit validation call.
+        $this->validateResolved();
+
+        return $this->validator->fails();
     }
 }

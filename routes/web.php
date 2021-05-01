@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\UserArticleController;
+use App\Http\Controllers\PublicArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,22 +21,25 @@ use Illuminate\Support\Facades\Route;
 /**
  * User zone
  */
-Route::get('/', [MainController::class, 'index'])->name('site-index');
+Route::get('/', [PublicArticleController::class, 'index'])->name('site-index');
 
-Route::get('/contacts', function () {
-    return view('contacts');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
-
-Route::get('search', [SearchController::class, 'search'])->name('search-form');
-
-Route::get('{id}', [UserArticleController::class, 'view'])
+Route::get('{id}', [PublicArticleController::class, 'item'])
     ->where('id', '\d+')
     ->name('view-article');
 
+Route::get('search', [SearchController::class, 'search'])->name('search-form');
+
+/**
+ * Static pages
+ */
+
+Route::get('contacts', function () {
+    return view('contacts');
+});
+
+Route::get('about', function () {
+    return view('about');
+});
 
 /**
  * Admin zone
@@ -51,7 +54,7 @@ Route::get('admin', [DashboardController::class, 'index'])->name('admin-dashboar
 Route::get('admin/title-list', [ArticleController::class, 'titleList'])->name('admin-title-list');
 
 
-Route::get('/admin/articles', [ArticleController::class, 'index'])->name('admin-article-list');
+Route::get('admin/articles', [ArticleController::class, 'index'])->name('admin-article-list');
 Route::get('admin/add-article', [ArticleController::class, 'addNew'])->name('admin-article-form');
 Route::post('admin/add-article', [ArticleController::class, 'create']);
 

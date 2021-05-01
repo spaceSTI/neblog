@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\AddArticleRequest;
+use App\Http\Requests\ArticlesFilterRequest;
 use App\Models\Article;
 use App\Services\ArticleService;
 
@@ -17,9 +18,9 @@ class ArticleController extends AdminController
         $this->service = $service;
     }
 
-    public function index()
+    public function index(ArticlesFilterRequest $request)
     {
-        return view('/articles/list', ['articles' => $this->service->getArticles()]);
+        return view('/articles/list', ['articles' => $this->service->getArticles($request)]);
     }
 
     public function titleList()

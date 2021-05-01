@@ -20,7 +20,7 @@ use App\Helpers;
             </div>
         @endif
         <div class="my-2">
-            <h3><a href="{{ $dto->itemUrl }}">{{ $dto->title }}</a></h3>
+            <h3><a href="{{ $dto->itemUrl }}">{{ $dto->title }}</a> {{ $dto->status }}</h3>
             <p>
                 <small>{{ $dto->createdAt }}</small>
             </p>

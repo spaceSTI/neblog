@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Http\Requests\AddArticleRequest;
+use App\Http\Requests\ArticlesFilterRequest;
 use App\Models\Article;
 use App\Presentations\ArticlePresentation;
 use App\Presentations\ArticleTransformer;
@@ -44,14 +45,31 @@ class ArticleService
     }
 
     /**
+     * @param ArticlesFilterRequest $request
      * @return LengthAwarePaginator
      */
-    public function getArticles(): LengthAwarePaginator
+    public function getArticles(ArticlesFilterRequest $request): LengthAwarePaginator
     {
+        //это ПРОСТО объект query builder`a
+        $query = Article::query();
+
+        //получить все посты, у которых статус как в запросе
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+        //получить все посты ИМЕЮЩИЕ хотя бы 1 конкретный тег переданный в запросе
+        if ($request->tag) {
+            $query->whereHas('tags', function ($q) use ($request) {
+                $q->where('tag', $request->tag);
+            });
+        }
+
         //инициализация ДТО, как пустого массива
         $dtos = [];
         //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансформер.
-        $paginator = Article::where('status', 'public')->orderby('created_at', 'desc')->paginate(5);
+        $paginator = $query
+            ->orderby('created_at', 'desc')
+            ->paginate(5);
         foreach ($paginator as $article) {
             $dtos[] = ArticleTransformer::buildForList($article);
         }

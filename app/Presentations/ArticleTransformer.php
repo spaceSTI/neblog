@@ -45,7 +45,7 @@ class ArticleTransformer
             $tagDto = new TagPresentation();
             $tagDto->id = $tag->id;
             $tagDto->tag = $tag->tag;
-            $tagDto->filterUrl = route('articles-filter-tag', ['id' => $tag->id]);
+            $tagDto->filterUrl = route('site-index', ['tag' => $tag->tag]);
             $dto->tags[] = $tagDto;
         }
         $dto->id = $article->id;
