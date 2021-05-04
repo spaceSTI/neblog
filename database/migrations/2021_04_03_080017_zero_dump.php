@@ -26,7 +26,7 @@ class ZeroDump extends Migration
 
         Schema::create('tags', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->string('tag', 50);
+            $table->string('tag_name', 50);
         });
 
         Schema::create('article_tag', function (Blueprint $table) {
