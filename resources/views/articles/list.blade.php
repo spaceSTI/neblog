@@ -37,7 +37,7 @@ use App\Helpers;
                 <div class="col">
 
                     @foreach( $dto->tags as $tag)
-                        <a href="{{ $tag->filterUrl }}"><span class="badge badge-secondary"> {!! $tag->tag !!} </span></a>
+                        <a href="{{ $tag->filterUrl }}"><span class="badge badge-secondary"> {!! $tag->name !!} </span></a>
                     @endforeach
 
                 </div>

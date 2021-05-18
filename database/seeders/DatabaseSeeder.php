@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        self::truncate();
+
         Article::factory()
             ->count(self::ARTICLES_QUANTITY)
             ->create();
@@ -50,5 +52,12 @@ class DatabaseSeeder extends Seeder
 
             $usedTagsIds[] = $tagId;
         }
+    }
+
+    private static function truncate(): void
+    {
+        DB::table('articles')->truncate();
+        DB::table('tags')->truncate();
+        DB::table('article_tag')->truncate();
     }
 }

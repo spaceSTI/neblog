@@ -24,4 +24,16 @@ class ArticlePresentation
      * @var TagPresentation[]
      */
     public array $tags = [];
+/*
+ * Это костыль. У сущности Article есть теги, но они представлены в виде объектов, а во вьюхе нужно, что-то попроще
+ * поэтому этот метод выковыривает и возвращает айдишники этих тегов.
+ */
+    public function getTagsIds(): array
+    {
+        $ids = [];
+        foreach ($this->tags as $tag) {
+            $ids[] = $tag->id;
+        }
+        return $ids;
+    }
 }

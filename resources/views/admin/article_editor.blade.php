@@ -1,9 +1,13 @@
 <?php
 /**
- * @var Article|null $article
+ * @var ArticlePresentation|null $article
+ * @var TagPresentation[] $tags
  */
 
-use App\Models\Article;
+use App\Presentations\ArticlePresentation;
+use App\Models\Tag;
+use App\Models\Article; //модель нужна для констант хранящих статусы.
+use App\Presentations\TagPresentation;
 
 ?>
 
@@ -50,6 +54,7 @@ use App\Models\Article;
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
                 <div class="form-group">
                     <input
                         class="form-control"
@@ -61,6 +66,34 @@ use App\Models\Article;
                     @error('keywords')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+                </div>
+
+                <div class="form-group">
+                    @error('tags')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    @error('tags.*')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+
+
+                    <select multiple size="10" name="tags[]" class="custom-select col-3">
+                        {{--Гетер возвращает айдишники тегов из ДТО--}}
+                        <?php $selectedTags = old('tags') ?? $article->getTagsIds() ?? []; ?>
+                        {{--$tags-коллекция моделей, в цикле разбирается на отедельные теги $tag
+                       в коллекции есть все свойства отдельных моделей, поэтому можно проверить айди тега
+                       прямо в коллекции, как в массиве. Потому что она массив массивов, в случае если есть,
+                       метод вьюхи 'selected' отмечает тег.
+                       --}}
+                        @foreach($tags as $tag)
+                            <option value="{{ $tag->id }}"
+                                {{ in_array($tag->id, $selectedTags) ? 'selected' : '' }}
+                            >
+                                {{ $tag->name }}
+                            </option>
+                        @endforeach
+                    </select>
+
                 </div>
 
                 <select name="status" class="custom-select col-2">

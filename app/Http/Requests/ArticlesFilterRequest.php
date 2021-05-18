@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Session;
 
 /**
- * @property ?string $tag
+ * @property ?string $name
  * @property ?string $status
  */
 class ArticlesFilterRequest extends FormRequest

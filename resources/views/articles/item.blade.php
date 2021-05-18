@@ -38,7 +38,7 @@ use App\Helpers;
             <div class="col">
 
                 @foreach( $article->tags as $tag)
-                    <a href="/"><span class="badge badge-secondary"> {!! $tag->tag !!} </span></a>
+                    <a href="/"><span class="badge badge-secondary"> {!! $tag->name !!} </span></a>
                 @endforeach
 
             </div>

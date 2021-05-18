@@ -11,15 +11,18 @@ use App\Presentations\ArticlePresentation;
 use App\Presentations\ArticleTransformer;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class ArticleService
 {
+    //не используется транзакция, чтобы из-за ошибки тегов не потерять все остальное.
     public function create(AddArticleRequest $request): int
     {
         $article = new Article();
         $this->fill($article, $request);
         $article->created_at = Carbon::now();
         $article->save();
+        $article->tags()->sync($request->tags);
         return $article->id;
     }
 
@@ -28,6 +31,7 @@ class ArticleService
         $article = Article::findOrFail($id);
         $this->fill($article, $request);
         $article->save();
+        $article->tags()->sync($request->tags);
     }
 
     private function fill(Article $article, AddArticleRequest $request): void
@@ -41,7 +45,7 @@ class ArticleService
 
     public function getArticle(int $id): ArticlePresentation
     {
-        return ArticleTransformer::buildForItem(Article::findOrFail($id));
+        return ArticleTransformer::buildSelected(Article::findOrFail($id));
     }
 
     /**
@@ -58,9 +62,9 @@ class ArticleService
             $query->where('status', $request->status);
         }
         //получить все посты ИМЕЮЩИЕ хотя бы 1 конкретный тег переданный в запросе
-        if ($request->tag) {
+        if ($request->name) {
             $query->whereHas('tags', function ($q) use ($request) {
-                $q->where('tag', $request->tag);
+                $q->where('name', $request->name);
             });
         }
 
@@ -71,7 +75,7 @@ class ArticleService
             ->orderby('created_at', 'desc')
             ->paginate(5);
         foreach ($paginator as $article) {
-            $dtos[] = ArticleTransformer::buildForList($article);
+            $dtos[] = ArticleTransformer::buildBasic($article);
         }
         return $this->rebuildPaginator($dtos, $paginator);
     }
@@ -83,7 +87,7 @@ class ArticleService
         //цикл перебирает коллекцию моделей и заталкивает каждую по очереди в трансформер.
         $paginator = Article::select(['id', 'title'])->paginate(50);
         foreach ($paginator as $article) {
-            $dtos[] = ArticleTransformer::buildForTitleList($article);
+            $dtos[] = ArticleTransformer::buildMinimal($article);
         }
         return $this->rebuildPaginator($dtos, $paginator);
     }

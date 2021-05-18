@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  *
  * Relations:
  *
- * @property-read Tag[] $tags
+ * @property-read Collection|Tag[] $tags
  *
  * @method static findOrFail(int $id): Article
  * @method static paginate(int $pageSize): LengthAwarePaginator

@@ -8,11 +8,12 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * @property-read string $title
- * @property-read string $brief
- * @property-read ?string $article
- * @property-read string $status
- * @property-read string $keywords
+ * @property string $title
+ * @property string $brief
+ * @property ?string $article
+ * @property string $status
+ * @property string $keywords
+ * @property int[] $tags
  */
 class AddArticleRequest extends FormRequest
 {
@@ -37,6 +38,8 @@ class AddArticleRequest extends FormRequest
             'title' => ['required', new InputStringSize(255)],
             'brief' => 'required',
             'keywords' => 'required',
+            'tags' => ['required', 'array', 'min:1'],
+            'tags.*' => ['exists:tags,id'],
             'status' => ['required', Rule::in(Article::STATUSES)],
         ];
     }
