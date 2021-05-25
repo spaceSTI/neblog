@@ -23,12 +23,12 @@ class ArticleController extends AdminController
 
     public function index(ArticlesFilterRequest $request)
     {
-        return view('/articles/list', ['articles' => $this->articleService->getArticles($request)]);
+        return view('articles/list', ['articles' => $this->articleService->getArticles($request)]);
     }
 
     public function titleList()
     {
-        return view('/admin/title_list', ['articles' => $this->articleService->getTitleList()]);
+        return view('admin/title_list', ['articles' => $this->articleService->getTitleList()]);
     }
 
     public function item(int $id)
@@ -36,9 +36,10 @@ class ArticleController extends AdminController
         return view('/articles/item', ['article' => $this->articleService->getArticle($id)]);
     }
 
+
     public function addNew()
     {
-        return view('/admin/article_editor', ['tags' => $this->tagService->getAll()]);
+        return view('admin/article_editor', ['tags' => $this->tagService->getAll()]);
     }
 
     public function create(AddArticleRequest $request)
@@ -55,7 +56,7 @@ class ArticleController extends AdminController
     public function edit(int $id)
     {
         return view(
-            '/admin/article_editor',
+            'admin/article_editor',
             [
                 'article' => $this->articleService->getArticle($id),
                 'tags' => $this->tagService->getAll(),

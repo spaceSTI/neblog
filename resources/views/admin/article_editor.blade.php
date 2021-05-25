@@ -79,7 +79,7 @@ use App\Presentations\TagPresentation;
 
                     <select multiple size="10" name="tags[]" class="custom-select col-3">
                         {{--Гетер возвращает айдишники тегов из ДТО--}}
-                        <?php $selectedTags = old('tags') ?? $article->getTagsIds() ?? []; ?>
+                        <?php $selectedTags = old('tags') ?? (isset($article) ? $article->getTagsIds() : []); ?>
                         {{--$tags-коллекция моделей, в цикле разбирается на отедельные теги $tag
                        в коллекции есть все свойства отдельных моделей, поэтому можно проверить айди тега
                        прямо в коллекции, как в массиве. Потому что она массив массивов, в случае если есть,

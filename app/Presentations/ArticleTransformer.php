@@ -22,6 +22,18 @@ class ArticleTransformer
         return $dto;
     }
 
+    public static function build(): TagPresentation
+    {
+        $dto = new TagPresentation();
+        $dto->id = (int)$data->id;
+        $dto->name = $data->$name;
+        $dto->articlesCount = $data->articles_count;
+        $dto->weight = 80 + round($data->articles_count / $this->maxUsageCount * 100);
+        $dto->links['filter'] = App::router()->url(['app\blog', 'ArticleController'], ['label' => $data->id]);
+        return $dto;
+    }
+
+
     /**
      * @param Collection|Tag[] $tagsModels
      * @return TagPresentation[]
