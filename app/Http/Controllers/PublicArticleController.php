@@ -6,15 +6,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticlesFilterRequest;
 use App\Models\Article;
 use App\Services\ArticleService;
-use Illuminate\Http\Request;
+use App\Services\TagService;
 
 class PublicArticleController extends Controller
 {
-    private ArticleService $service;
+    private ArticleService $articleService;
 
-    public function __construct(ArticleService $service)
+    private TagService $tagService;
+
+    public function __construct(ArticleService $service, TagService $tagService)
     {
-        $this->service = $service;
+        $this->articleService = $service;
+        $this->tagService = $tagService;
     }
 
     public function index(ArticlesFilterRequest $request)
@@ -24,11 +27,17 @@ class PublicArticleController extends Controller
         }
 
         $request->status = Article::STATUS_PUBLIC;
-        return view('/articles/list', ['articles' => $this->service->getArticles($request)]);
+        return view(
+            '/articles/list',
+            [
+                'articles' => $this->articleService->getArticles($request),
+                'tagsWithWeights' => $this->tagService->getTagsWithWeight(),
+            ]
+        );
     }
 
     public function item(int $id)
     {
-        return view('/articles/item', ['article' => $this->service->getArticle($id)]);
+        return view('/articles/item', ['article' => $this->articleService->getArticle($id)]);
     }
 }

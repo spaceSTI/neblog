@@ -16,22 +16,11 @@
                 <div class="row">
                     <div class="col">
                         <h3>Облако тегов</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            In vitae eros nec erat mattis bibendum.
-                            Mauris semper lacus sit amet odio facilisis, ac maximus nunc sagittis.
-                            Nullam viverra purus egestas nisl suscipit, consectetur maximus ante mattis.
-                            Integer malesuada odio feugiat mattis dignissim.
-                            Vestibulum nec felis sit amet dui ornare vulputate vel et odio.
-                            Suspendisse in turpis blandit felis faucibus tempor eget sit amet nisi.
-                            Sed vestibulum enim in lectus fringilla viverra.</p>
-
-                        <h3>Метки</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            In vitae eros nec erat mattis bibendum.
-                            Mauris semper lacus sit amet odio facilisis, ac maximus nunc sagittis.
-                            Nullam viverra purus egestas nisl suscipit, consectetur maximus ante mattis.
-                            Integer malesuada odio feugiat mattis dignissim.
-                            .</p>
+                        <p>
+                             @foreach($tagsWithWeights as $tag)
+                                <span style='font-size: {{ 80 + $tag->fontSize }}%'>{{ $tag->name }}</span>
+                             @endforeach
+                        </p>
                     </div>
                 </div>
             </div>

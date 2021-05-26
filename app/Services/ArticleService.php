@@ -11,7 +11,6 @@ use App\Presentations\ArticlePresentation;
 use App\Presentations\ArticleTransformer;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\DB;
 
 class ArticleService
 {

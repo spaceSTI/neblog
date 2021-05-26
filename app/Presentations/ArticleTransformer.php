@@ -22,38 +22,6 @@ class ArticleTransformer
         return $dto;
     }
 
-    public static function build(): TagPresentation
-    {
-        $dto = new TagPresentation();
-        $dto->id = (int)$data->id;
-        $dto->name = $data->$name;
-        $dto->articlesCount = $data->articles_count;
-        $dto->weight = 80 + round($data->articles_count / $this->maxUsageCount * 100);
-        $dto->links['filter'] = App::router()->url(['app\blog', 'ArticleController'], ['label' => $data->id]);
-        return $dto;
-    }
-
-
-    /**
-     * @param Collection|Tag[] $tagsModels
-     * @return TagPresentation[]
-     */
-    public static function buildSelectedList(Collection $tagsModels): array
-    {
-        /*
-         * $tags[] потом станет массивом с ДТО. В цикле перебирается коллекция моделей и заполняются DTO.
-         */
-        $tags = [];
-        foreach ($tagsModels as $tag) {
-            $tagDto = new TagPresentation();
-            $tagDto->id = $tag->id;
-            $tagDto->name = $tag->name;
-            $tagDto->filterUrl = route('site-index', ['tag' => $tag->name]);
-            $tags[] = $tagDto;
-        }
-        return $tags;
-    }
-
     public static function buildMinimal(Article $article): ArticlePresentation
     {
         $dto = new ArticlePresentation();
@@ -80,7 +48,7 @@ class ArticleTransformer
         $dto->brief = $article->brief;
         $dto->status = $article->status;
         $dto->createdAt = $article->created_at->format('d/m/Y');
-        $dto->tags = self::buildSelectedList($article->tags);
+        $dto->tags = TagTransformer::build($article->tags);
         return $dto;
     }
 }
