@@ -6,6 +6,7 @@ namespace App\Services;
 use App\Models\Tag;
 use App\Presentations\TagPresentation;
 use App\Presentations\TagTransformer;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as BaseCollection;
@@ -24,8 +25,16 @@ class TagService
 
     public function getTagsWithWeight(): array
     {
-        return TagTransformer::buildWithWeight($this->getAllTagsModels(), $this->getWeight());
+        if (Cache::has('tags')) {
+            $tags = Cache::get('tags');
+        } else {
+            $tags = TagTransformer::buildWithWeight($this->getAllTagsModels(), $this->getWeight());
+            serialize($tags);
+            Cache::put('tags', $tags);
+        }
+        return $tags;
     }
+
 
     /**
      * @return Collection|Tag[]

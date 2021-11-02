@@ -38,6 +38,23 @@ class PublicArticleController extends Controller
 
     public function item(int $id)
     {
-        return view('/articles/item', ['article' => $this->articleService->getArticle($id)]);
+        return view(
+            '/articles/item',
+            [
+                'article' => $this->articleService->getArticle($id),
+                'tagsWithWeights' => $this->tagService->getTagsWithWeight(),
+            ]
+        );
+    }
+
+    public function printArticle(int $id)
+    {
+        return view(
+            '/articles/print_version',
+            [
+                'article' => $this->articleService->getArticle($id),
+                'tagsWithWeights' => $this->tagService->getTagsWithWeight(),
+            ]
+        );
     }
 }

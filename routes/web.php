@@ -27,6 +27,10 @@ Route::get('{id}', [PublicArticleController::class, 'item'])
     ->where('id', '\d+')
     ->name('view-article');
 
+Route::get('print/{id}', [PublicArticleController::class, 'printArticle'])
+    ->where('id', '\d+')
+    ->name('print-article');
+
 Route::get('search', [SearchController::class, 'search'])->name('search-form');
 
 /**
@@ -49,22 +53,19 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('admin', [DashboardController::class, 'index'])->name('admin-dashboard');
+Route::prefix('admin')->group(function () {
+    Route::get('/articles', [ArticleController::class, 'index'])->name('admin-article-list');
+    Route::get('/add-article', [ArticleController::class, 'addNew'])->name('admin-article-form');
+    Route::post('/add-article', [ArticleController::class, 'create']);
 
-Route::get('admin/title-list', [ArticleController::class, 'titleList'])->name('admin-title-list');
+    Route::get('/edit-article/{id}', [ArticleController::class, 'edit'])
+        ->where('id', '\d+')
+        ->name('admin-edit-article');
 
+    Route::post('/edit-article/{id}', [ArticleController::class, 'update'])->where('id', '\d+');
 
-Route::get('admin/articles', [ArticleController::class, 'index'])->name('admin-article-list');
-Route::get('admin/add-article', [ArticleController::class, 'addNew'])->name('admin-article-form');
-Route::post('admin/add-article', [ArticleController::class, 'create']);
+    Route::get('/{id}', [ArticleController::class, 'item'])
+        ->where('id', '\d+')
+        ->name('admin-view-article');
 
-Route::get('admin/edit-article/{id}', [ArticleController::class, 'edit'])
-    ->where('id', '\d+')
-    ->name('admin-edit-article');
-
-Route::post('admin/edit-article/{id}', [ArticleController::class, 'update'])->where('id', '\d+');
-
-Route::get('admin/{id}', [ArticleController::class, 'item'])
-    ->where('id', '\d+')
-    ->name('admin-view-article');
-
+});
