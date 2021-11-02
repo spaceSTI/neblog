@@ -17,7 +17,12 @@ use App\Helpers;
 
 @section('content')
     <div class="my-2">
-        <h3>{{ $article->title }}</h3>
+        <div class="row">
+            <div class="col-10"><h4>{{ $article->title }}</h4></div>
+            <div class="col-2">
+                <small><u><a href="{{ route('print-article', $article->id) }}">Версия для печати</a></u></small>
+            </div>
+        </div>
         <p>
             <small>{{ $article->createdAt }}</small>
         </p>

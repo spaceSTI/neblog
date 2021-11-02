@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
 
     private const
         ARTICLES_QUANTITY = 50,
-        TAGS_QUANTITY = 15;
+        TAGS_QUANTITY = 40;
 
     /**
      * Seed the application's database.

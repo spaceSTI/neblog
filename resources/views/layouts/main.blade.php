@@ -7,24 +7,29 @@
     <div class="container">
         @include('layouts/parts/flash_message')
         @include('layouts/parts/navigation')
-        <div class="m-2 p-0 row">
-            <div class="col-md-8">
-                @yield('content')
-            </div>
-            <div class="col-md-4 d-none d-sm-none d-md-block">
-                News Feed block
-                <div class="row">
-                    <div class="col">
-                        <h3>Облако тегов</h3>
-                        <p>
-                             @foreach($tagsWithWeights as $tag)
-                                <span style='font-size: {{ 80 + $tag->fontSize }}%'>{{ $tag->name }}</span>
-                             @endforeach
-                        </p>
+        @if(Route::current()->getName() === 'view-article')
+            <div class="m-2 p-0 row">
+                <div class="col-md-10">
+                    @yield('content')
+                </div>
+                <div class="col-md-2 d-none d-sm-none d-md-block">
+                    <div class="row">
+                        @include('layouts/parts/tags_cloud')
                     </div>
                 </div>
             </div>
-        </div>
+        @else
+            <div class="m-2 p-0 row">
+                <div class="col-md-7">
+                    @yield('content')
+                </div>
+                <div class="col-md-5 d-none d-sm-none d-md-block">
+                    <div class="row">
+                        @include('layouts/parts/tags_cloud')
+                    </div>
+                </div>
+            </div>
+        @endif
         @include('layouts/parts/footer')
     </div>
 </body>
