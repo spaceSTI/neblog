@@ -69,3 +69,7 @@ Route::prefix('admin')->group(function () {
         ->name('admin-view-article');
 
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
