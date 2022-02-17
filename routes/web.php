@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PublicArticleController;
@@ -69,7 +70,10 @@ Route::prefix('admin')->group(function () {
         ->name('admin-view-article');
 
 });
-
-Auth::routes();
+/**
+ * User register zone
+ */
+Route::get('register', [RegisterController::class, 'showRegisterForm'])->name('register');
+Route::post('register', [RegisterController::class, 'userCreate'])->name('user.create');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
