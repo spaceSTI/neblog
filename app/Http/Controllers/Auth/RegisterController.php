@@ -7,22 +7,29 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Services\TagService;
 
 class RegisterController extends Controller
 {
+    private TagService $tagService;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(TagService $tagService)
     {
         $this->middleware('guest');
+        $this->tagService = $tagService;
     }
 
     public function showRegisterForm()
     {
-        return view('auth.register');
+        return view('auth.register',
+            [
+                'tagsWithWeights' => $this->tagService->getTagsWithWeight(),
+            ]);
     }
 
     protected function userCreate(Request $data)
@@ -40,6 +47,6 @@ class RegisterController extends Controller
         ]);
         session()->flash('success', 'Регистрация прошла успешно!');
         Auth::login($user);
-       return redirect()->route('site-index');
+        return redirect()->route('site-index');
     }
 }

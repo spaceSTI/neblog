@@ -20,6 +20,7 @@ use App\Helpers;
             @endif
             <a class="p-2 text-dark" href="/contacts">Контакты</a>
             <a class="p-2 text-dark" href="/about">О сайте</a>
+            <a class="p-2 text-dark" href="/register">Регистрация</a>
         </nav>
         {{----}}
         <form class="d-none d-sm-none d-md-block mb-1 mt-1 col-sm-12 col-md-4 col-lg-4 col-xl-4" action="{{ route('search-form') }}" method="get">
@@ -44,6 +45,7 @@ use App\Helpers;
                     <a class="dropdown-item" href="/">Блог</a>
                     <a class="dropdown-item" href="/contacts">Контакты</a>
                     <a class="dropdown-item" href="/about">О сайте</a>
+                    <a class="dropdown-item" href="/register">Регистрация</a>
                 </div>
             </div>
         </div>
